@@ -1,45 +1,34 @@
 #!/usr/bin/env Rscript
 
-# __TITLE__
+# hmmrank.r
 #
-# Author: __AUTHOR_EMAIL__
+# Ranks sequences according to their score against different hmm profiles.
+#
+# Author: daniel.lundin@lnu.se
 
 suppressPackageStartupMessages(library(optparse))
 suppressPackageStartupMessages(library(readr))
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(tidyr))
 
-# Constants for names of different formats
-FORMAT_ONE        = 'one'
-FORMAT_TWO        = 'two'
-FORMAT_DEFAULT    = FORMAT_ONE
-FORMATS           = c(FORMAT_ONE, FORMAT_TWO)
-
 # Get arguments
 option_list = list(
   make_option(
-    c('--inputfile'), type='character',
-    help='Name of input file'
-  ),
-  make_option(
-    c('--format'), type='character', default=FORMAT_DEFAULT,
-    help='Output format, default: [default]. See --formats for a list of supported formats.'
-  ),
-  make_option(
-    c('--formats'), action='store_true', default=FALSE,
-    help='Lists supported formats'
+    c('--outfile'), type='character',
+    help='Name of output file'
   ),
   make_option(
     c("-v", "--verbose"), action="store_true", default=FALSE, 
     help="Print progress messages"
   )
 )
-opt = parse_args(OptionParser(option_list=option_list))
-
-if ( opt$formats ) {
-  write(cat("Supported formats:", FORMATS, "\n"))
-  quit('no')
-}
+opt = parse_args(
+  OptionParser(
+    usage = "%prog [options] file0.tblout .. filen.tblout", 
+    option_list = option_list
+  ), 
+  positional_arguments = TRUE
+)
 
 logmsg = function(msg, llevel='INFO') {
   if ( opt$verbose ) {
