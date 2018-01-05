@@ -31,13 +31,44 @@ opt = parse_args(
 )
 
 logmsg = function(msg, llevel='INFO') {
-  if ( opt$verbose ) {
+  if ( opt$options$verbose ) {
     write(
       sprintf("%s: %s: %s", llevel, format(Sys.time(), "%Y-%m-%d %H:%M:%S"), msg),
       stderr()
     )
   }
 }
-logmsg(sprintf("Reading %s", opt$inputfile))
+
+# Table to fill with data from files
+tblout <- tibble(
+  accno = character(), profile = character(),
+  evalue = double(), score = double()
+)
+
+# Read all the tblout files
+for ( tbloutfile in grep('\\.tblout', opt$args, value=TRUE) ) {
+  logmsg(sprintf("Reading %s", tbloutfile))
+  t <-  read_fwf(
+    tbloutfile, fwf_cols(content = c(1, NA)), 
+    col_types = cols(content = col_character()), 
+    comment='#'
+  ) %>% 
+    separate(
+      content, 
+      c('accno', 't0', 'profile', 't1', 'evalue', 'score', 'bias', 'f0', 'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9', 'f10', 'rest'), 
+      '\\s+', 
+      extra='merge',
+      convert = T
+    )
+  tblout <- union(tblout, t %>% select(accno, profile, evalue, score))
+}
+
+# Calculate rank
+tblout <- tblout %>% group_by(accno) %>% mutate(rank = rank(desc(score)))
+
+write_tsv(
+  tblout %>% select(accno, profile, rank, evalue, score) %>% arrange(accno, rank),
+  opt$options$outfile
+)
 
 logmsg("Done")
