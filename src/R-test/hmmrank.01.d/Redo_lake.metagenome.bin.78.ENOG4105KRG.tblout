@@ -1,0 +1,13 @@
+#                                                                       --- full sequence ---- --- best 1 domain ---- --- domain number estimation ----
+# target name        accession  query name                   accession    E-value  score  bias   E-value  score  bias   exp reg clu  ov env dom rep inc description of target
+#------------------- ----------         -------------------- ---------- --------- ------ ----- --------- ------ -----   --- --- --- --- --- --- --- --- ---------------------
+#
+# Program:         hmmsearch
+# Version:         3.1b2 (February 2015)
+# Pipeline mode:   SEARCH
+# Query file:      ENOG4105KRG.hmm
+# Target file:     Redo_lake.metagenome.bin.78.faa
+# Option settings: hmmsearch -o Redo_lake.metagenome.bin.78.ENOG4105KRG.hmmout --tblout Redo_lake.metagenome.bin.78.ENOG4105KRG.tblout --domtblout Redo_lake.metagenome.bin.78.ENOG4105KRG.domtblout ENOG4105KRG.hmm Redo_lake.metagenome.bin.78.faa 
+# Current dir:     /active/projects/Redo_lake/assembly/megahit/metabat/all.megahit.fna.metabat-bins/prokka
+# Date:            Tue Jan  9 09:45:25 2018
+# [ok]
