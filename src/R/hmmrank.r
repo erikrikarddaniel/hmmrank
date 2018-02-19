@@ -60,7 +60,7 @@ for ( tbloutfile in grep('\\.tblout', opt$args, value=TRUE) ) {
       extra='merge',
       convert = T
     )
-  tblout <- union(tblout, t %>% select(accno, profile, evalue, score))
+  if ( t %>% nrow() > 0 ) tblout <- union(tblout, t %>% select(accno, profile, evalue, score))
 }
 
 # Calculate rank
