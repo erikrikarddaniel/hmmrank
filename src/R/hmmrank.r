@@ -11,11 +11,21 @@ suppressPackageStartupMessages(library(readr))
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(tidyr))
 
+SCRIPT_VERSION = '1.0.1'
+
 # Get arguments
 option_list = list(
   make_option(
+    c('--minscore'), type='double', default=0.0,
+    help='Minimum score, default %default'
+  ),
+  make_option(
     c('--outfile'), type='character',
     help='Name of output file'
+  ),
+  make_option(
+    c('--scorefile'), type='character',
+    help='Name of tsv file containing accept scores (GA in score_type): profile, score_type and seq_score'
   ),
   make_option(
     c("-v", "--verbose"), action="store_true", default=FALSE, 
@@ -38,6 +48,8 @@ logmsg = function(msg, llevel='INFO') {
     )
   }
 }
+
+logmsg(sprintf("hmmrank.r %s", SCRIPT_VERSION))
 
 # Table to fill with data from files
 tblout <- tibble(
@@ -63,8 +75,26 @@ for ( tbloutfile in grep('\\.tblout', opt$args, value=TRUE) ) {
   if ( t %>% nrow() > 0 ) tblout <- union(tblout, t %>% select(accno, profile, evalue, score))
 }
 
+# If we're given a scorefile as an option, read and left join
+if ( length(opt$options$scorefile) > 0 ) {
+  tblout <- tblout %>%
+    left_join(
+      read_tsv(
+        opt$options$scorefile,
+        col_types = cols(.default = col_character(), seq_score = col_double(), domain_score = col_double())
+      ) %>%
+        filter(score_type == 'GA'),
+      by = 'profile'
+    ) %>%
+    replace_na(list('seq_score' = opt$options$minscore))
+} else {
+  tblout <- tblout %>% mutate(seq_score = opt$options$minscore)
+}
+
 # Calculate rank
-tblout <- tblout %>% group_by(accno) %>% mutate(rank = rank(desc(score)))
+tblout <- tblout %>% 
+  filter(score >= seq_score) %>%
+  group_by(accno) %>% mutate(rank = rank(desc(score)))
 
 write_tsv(
   tblout %>% select(accno, profile, rank, evalue, score) %>% arrange(accno, rank),
