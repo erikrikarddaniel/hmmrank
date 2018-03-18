@@ -77,6 +77,7 @@ for ( tbloutfile in grep('\\.tblout', opt$args, value=TRUE) ) {
 
 # If we're given a scorefile as an option, read and left join
 if ( length(opt$options$scorefile) > 0 ) {
+  logmsg(sprintf("Joining in scores from %s, setting minimum score for absents to %5.2f", opt$options$scorefile, opt$options$minscore))
   tblout <- tblout %>%
     left_join(
       read_tsv(
@@ -88,14 +89,17 @@ if ( length(opt$options$scorefile) > 0 ) {
     ) %>%
     replace_na(list('seq_score' = opt$options$minscore))
 } else {
+  logmsg(sprintf("Setting minimum scores to %5.2f", opt$options$minscore))
   tblout <- tblout %>% mutate(seq_score = opt$options$minscore)
 }
 
 # Calculate rank
+logmsg("Calculating ranks")
 tblout <- tblout %>% 
   filter(score >= seq_score) %>%
   group_by(accno) %>% mutate(rank = rank(desc(score)))
 
+logmsg(sprintf("Writing to %s", opt$options$outfile))
 write_tsv(
   tblout %>% select(accno, profile, rank, evalue, score) %>% arrange(accno, rank),
   opt$options$outfile
