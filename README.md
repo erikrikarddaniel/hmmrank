@@ -5,6 +5,8 @@ Given a set of hmmsearch "tblout" result files, this R script outputs a table wh
 against a set of hmm profiles are ranked based on score. It requires the `optparse` package as well as
 `readr`, `tidyr` and `dplyr` from Tidyverse.
 
+## Installation and documentation
+
 After cloning the repository and installing required libraries, you can run the script with`--help` to 
 get help...
 
