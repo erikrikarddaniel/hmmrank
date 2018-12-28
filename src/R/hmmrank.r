@@ -12,7 +12,7 @@ suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(tidyr))
 suppressPackageStartupMessages(library(data.table))
 
-SCRIPT_VERSION = '1.1.0'
+SCRIPT_VERSION = '1.2.0'
 
 # Get arguments
 # For interactive testing:
@@ -21,6 +21,10 @@ option_list = list(
   make_option(
     c('--minscore'), type='double', default=0.0,
     help='Minimum score, default %default'
+  ),
+  make_option(
+    c("--only_best_scoring"), action="store_true", default=FALSE, 
+    help="Output only the best scoring, i.e. scores < 2"
   ),
   make_option(
     c('--outfile'), type='character',
@@ -108,9 +112,16 @@ logmsg("Calculating ranks")
 tblout[score >= seq_score, rank := frank(desc(score)), by = accno]
 
 logmsg(sprintf("Writing to %s", opt$options$outfile))
-write_tsv(
-  tblout[score >= seq_score] %>% select(accno, profile, rank, evalue, score) %>% arrange(accno, rank),
-  opt$options$outfile
-)
+if ( opt$options$only_best_scoring ) {
+  write_tsv(
+    tblout[score >= seq_score & rank < 2] %>% select(accno, profile, rank, evalue, score) %>% arrange(accno, rank),
+    opt$options$outfile
+  )
+} else {
+  write_tsv(
+    tblout[score >= seq_score] %>% select(accno, profile, rank, evalue, score) %>% arrange(accno, rank),
+    opt$options$outfile
+  )
+}
 
 logmsg("Done")
