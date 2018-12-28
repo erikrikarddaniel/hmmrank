@@ -11,9 +11,11 @@ suppressPackageStartupMessages(library(readr))
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(tidyr))
 
-SCRIPT_VERSION = '1.0.1'
+SCRIPT_VERSION = '1.0.2'
 
 # Get arguments
+# For interactive testing:
+# opt <- list('options' = list('verbose' = TRUE), 'args' = c('hmmrank.03.d/NrdDa.tblout', 'hmmrank.03.d/NrdDc.tblout'))
 option_list = list(
   make_option(
     c('--minscore'), type='double', default=0.0,
@@ -60,7 +62,7 @@ tblout <- tibble(
 # Read all the tblout files
 for ( tbloutfile in grep('\\.tblout', opt$args, value=TRUE) ) {
   logmsg(sprintf("Reading %s", tbloutfile))
-  t <-  read_fwf(
+  t <- read_fwf(
     tbloutfile, fwf_cols(content = c(1, NA)), 
     col_types = cols(content = col_character()), 
     comment='#'
@@ -70,9 +72,14 @@ for ( tbloutfile in grep('\\.tblout', opt$args, value=TRUE) ) {
       c('accno', 't0', 'profile', 't1', 'evalue', 'score', 'bias', 'f0', 'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9', 'f10', 'rest'), 
       '\\s+', 
       extra='merge',
-      convert = T
+      convert = FALSE
     )
-  if ( t %>% nrow() > 0 ) tblout <- union(tblout, t %>% select(accno, profile, evalue, score))
+  if ( t %>% nrow() > 0 ) {
+    tblout <- union(
+      tblout, 
+      t %>% transmute(accno, profile, evalue = as.double(evalue), score = as.double(score))
+    )
+  }
 }
 
 # If we're given a scorefile as an option, read and left join
