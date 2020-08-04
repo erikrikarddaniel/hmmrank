@@ -7,21 +7,25 @@ all: hmmrank
 hmmrank: hmmrank.00 hmmrank.01 hmmrank.02 hmmrank.03 hmmrank.04
 
 hmmrank.00:
-	../R/hmmrank.r --verbose --outfile=$@.out $@.d/*.tblout
+	../R/hmmrank.r --outfile=$@.out $@.d/*.tblout
 	@$(CHECK)
 
+# Empty input file
 hmmrank.01:
-	../R/hmmrank.r --verbose --outfile=$@.out $@.d/*.tblout
-	@$(CHECK)
+	../R/hmmrank.r --outfile=$@.out $@.d/*.tblout
+	@rc=$$?; if [ $$rc -gt 0 ]; then echo "Return code > 0, probably an error"; exit $$rc; else echo "*** $@ OK ***"; fi
 
 hmmrank.02:
-	../R/hmmrank.r --verbose --scorefile=$@.profile_scores.tsv --minscore=400 --outfile=$@.out $@.d/*.tblout
+	../R/hmmrank.r --scorefile=$@.profile_scores.tsv --minscore=400 --outfile=$@.out $@.d/*.tblout
 	@$(CHECK)
 
 hmmrank.03:
-	../R/hmmrank.r --verbose --outfile=$@.out $@.d/*.tblout
+	../R/hmmrank.r --outfile=$@.out $@.d/*.tblout
 	@$(CHECK)
 
 hmmrank.04:
-	../R/hmmrank.r --verbose --only_best_scoring --scorefile=$@.profile_scores.tsv --minscore=400 --outfile=$@.out $@.d/*.tblout
+	../R/hmmrank.r --only_best_scoring --scorefile=$@.profile_scores.tsv --minscore=400 --outfile=$@.out $@.d/*.tblout
 	@$(CHECK)
+
+##hmmrank.05:
+##	../R/hmmrank.r --verbose

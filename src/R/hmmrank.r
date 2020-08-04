@@ -83,7 +83,7 @@ for ( tbloutfile in grep('\\.tblout', opt$args, value=TRUE) ) {
 if ( length(tlist) > 0  ) {
   tblout <- rbindlist(tlist)
 } else {
-  logmsg("No results found, exiting")
+  write("No results found, exiting", stderr())
   quit(save = 'no', status = 0)
 }
 setkey(tblout, profile, accno)
