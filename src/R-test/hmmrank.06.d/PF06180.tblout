@@ -1,0 +1,23 @@
+#                                                                                          --- full sequence ---- --- best 1 domain ---- --- domain number estimation ----
+# target name                                   accession  query name           accession    E-value  score  bias   E-value  score  bias   exp reg clu  ov env dom rep inc description of target
+#                           ------------------- ---------- -------------------- ---------- --------- ------ ----- --------- ------ -----   --- --- --- --- --- --- --- --- ---------------------
+envision.uc0.99_ENV2_S6_k141_202097_1_1         -          CbiK                 PF06180.12   2.6e-07   37.9   0.0     0.021   21.8   0.0   2.6   3   0   0   3   3   2   2 -
+envision.uc0.99_ENV3_S3_k141_286858_3_1         -          CbiK                 PF06180.12   3.2e-06   34.3   0.0   3.4e-06   34.2   0.0   1.0   1   0   0   1   1   1   1 -
+envision.uc0.99_ENV3_MSO_k141_117317_2_1        -          CbiK                 PF06180.12   5.7e-06   33.5   0.0   6.1e-06   33.4   0.0   1.0   1   0   0   1   1   1   1 -
+envision.uc0.99_ENV1_ADD_022_k141_148422_1_1    -          CbiK                 PF06180.12   1.1e-05   32.5   0.0      0.15   19.0   0.0   2.4   2   1   0   2   2   2   2 -
+envision.uc0.99_ENV1_ADD_022_k141_170195_19_1   -          CbiK                 PF06180.12   1.2e-05   32.4   0.0   1.4e-05   32.2   0.0   1.1   1   0   0   1   1   1   1 -
+envision.uc0.99_ENV3_S6_k141_296524_2_1         -          CbiK                 PF06180.12   2.5e-05   31.4   0.0   2.8e-05   31.3   0.0   1.0   1   0   0   1   1   1   1 -
+envision.uc0.99_ENV3_S6_k141_356882_2_1         -          CbiK                 PF06180.12       9.4   13.1   0.2        14   12.5   0.2   1.3   1   0   0   1   1   1   0 -
+envision.uc0.99_ENV3_MSO_k141_130722_1_1        -          CbiK                 PF06180.12       9.9   13.0   0.1        23   11.8   0.0   1.6   1   1   0   1   1   1   0 -
+envision.uc0.99_ENV1_S6_k141_81110_1_1          -          CbiK                 PF06180.12       9.9   13.0   0.7        54   10.6   0.1   1.9   1   1   1   2   2   2   0 -
+envision_debris_megahit_assembly_k141_1007903_1 -          CbiK                 PF06180.12       9.9   13.0   0.0        12   12.8   0.0   1.2   1   0   0   1   1   1   0 # 1 # 450 # 1 # ID=945395_1;partial=11;start_type=Edge;rbs_motif=None;rbs_spacer=None;gc_cont=0.447
+#
+# Program:         hmmsearch
+# Version:         3.2.1 (June 2018)
+# Pipeline mode:   SEARCH
+# Query file:      PF06180.hmm
+# Target file:     /dev/fd/63
+# Option settings: hmmsearch --tblout PF06180.tblout --domtblout PF06180.domtblout --cpu 4 PF06180.hmm /dev/fd/63 
+# Current dir:     /crex/proj/snic2020-16-76/nobackup/projects/Ben/BenEnv_mrna/assemblies/all_clustered_plus_debris/pfam-hmmer
+# Date:            Wed Jul  1 17:15:58 2020
+# [ok]

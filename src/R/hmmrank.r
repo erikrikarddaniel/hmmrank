@@ -20,6 +20,10 @@ SCRIPT_VERSION = '1.3.0'
 # opt <- list('options' = list('verbose' = TRUE, minscore = 0, scorefile = 'hmmrank.02.profile_scores.tsv'), 'args' = c('hmmrank.02.d/NrdAe.tblout', 'hmmrank.02.d/NrdAg.tblout', 'hmmrank.02.d/NrdAh.tblout', 'hmmrank.02.d/NrdAi.tblout', 'hmmrank.02.d/NrdAk.tblout', 'hmmrank.02.d/NrdAm.tblout', 'hmmrank.02.d/NrdAn.tblout', 'hmmrank.02.d/NrdAq.tblout', 'hmmrank.02.d/NrdA.tblout', 'hmmrank.02.d/NrdAz3.tblout', 'hmmrank.02.d/NrdAz4.tblout', 'hmmrank.02.d/NrdAz.tblout'))
 option_list = list(
   make_option(
+    '--annottable', type = "character",
+    help = "Name of table with annotation assignments, at a minium must contain 'protein' and 'profile' columns. The 'profile' column might contain multiple profiles, separated by '&'."
+  ),
+  make_option(
     c('--minscore'), type='double', default=0.0,
     help='Minimum score, default %default'
   ),

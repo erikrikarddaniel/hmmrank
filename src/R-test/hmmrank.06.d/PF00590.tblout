@@ -1,0 +1,22 @@
+#                                                                                          --- full sequence ---- --- best 1 domain ---- --- domain number estimation ----
+# target name                                   accession  query name           accession    E-value  score  bias   E-value  score  bias   exp reg clu  ov env dom rep inc description of target
+#                           ------------------- ---------- -------------------- ---------- --------- ------ ----- --------- ------ -----   --- --- --- --- --- --- --- --- ---------------------
+envision.uc0.99_ENV3_MSO_k141_41650_1_1         -          TP_methylase         PF00590.21     1e-53  190.1   0.2   1.5e-53  189.5   0.2   1.3   1   0   0   1   1   1   1 -
+envision.uc0.99_ENV3_MSO_k141_275855_5_1        -          TP_methylase         PF00590.21     3e-53  188.6   0.5   6.4e-53  187.5   0.0   1.8   2   0   0   2   2   1   1 -
+envision.uc0.99_ENV3_S3_k141_16845_4_1          -          TP_methylase         PF00590.21   3.1e-52  185.3   0.0   6.6e-52  184.2   0.0   1.5   2   0   0   2   2   1   1 -
+envision.uc0.99_ENV3_MSO_k141_383762_1_1        -          TP_methylase         PF00590.21   3.2e-52  185.2   0.0     5e-52  184.6   0.0   1.3   1   0   0   1   1   1   1 -
+envision.uc0.99_ENV3_MSO_k141_588185_1_1        -          TP_methylase         PF00590.21   4.5e-52  184.7   0.0   5.3e-52  184.5   0.0   1.1   1   0   0   1   1   1   1 -
+envision.uc0.99_ENV3_S3_k141_232529_2_1         -          TP_methylase         PF00590.21   6.6e-52  184.2   0.1   1.8e-51  182.7   0.0   1.7   2   0   0   2   2   1   1 -
+envision_debris_megahit_assembly_k141_904884_1  -          TP_methylase         PF00590.21       9.3   13.7   0.0        10   13.6   0.0   1.0   1   0   0   1   1   1   0 # 3 # 266 # -1 # ID=842377_1;partial=10;start_type=TTG;rbs_motif=TAAT;rbs_spacer=13bp;gc_cont=0.280
+envision_debris_megahit_assembly_k141_1025795_1 -          TP_methylase         PF00590.21       9.4   13.7   0.0        15   13.1   0.0   1.3   1   1   0   1   1   1   0 # 1 # 429 # -1 # ID=963286_1;partial=11;start_type=Edge;rbs_motif=None;rbs_spacer=None;gc_cont=0.531
+envision.uc0.99_ENV3_MSO_k141_104919_1_1        -          TP_methylase         PF00590.21       9.9   13.7   0.2        57   11.2   0.2   2.1   1   1   0   1   1   1   0 -
+#
+# Program:         hmmsearch
+# Version:         3.2.1 (June 2018)
+# Pipeline mode:   SEARCH
+# Query file:      PF00590.hmm
+# Target file:     /dev/fd/63
+# Option settings: hmmsearch --tblout PF00590.tblout --domtblout PF00590.domtblout --cpu 4 PF00590.hmm /dev/fd/63 
+# Current dir:     /crex/proj/snic2020-16-76/nobackup/projects/Ben/BenEnv_mrna/assemblies/all_clustered_plus_debris/pfam-hmmer
+# Date:            Tue Jul 28 07:54:56 2020
+# [ok]

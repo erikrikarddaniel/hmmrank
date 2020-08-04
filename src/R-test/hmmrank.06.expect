@@ -1,0 +1,42 @@
+accno	profile	rank	evalue	score	domain	protein	ec_number	specific	minscore_matches
+envision.uc0.99_ENV1_ADD_022_k141_148422_1_1	PF06180	1	1.1e-5	32.5	All     CbiK    4.99.1.3	T	T
+envision.uc0.99_ENV1_ADD_022_k141_170195_19_1	PF06180	1	1.2e-5	32.4	All     CbiK    4.99.1.3	T	T
+envision.uc0.99_ENV1_ADD_022_k141_274526_4_1	arCOG01044	1	3.1e-38	139	Archaea SirC    1.3.1.76	T	T
+envision.uc0.99_ENV1_ADD_022_k141_286016_2_1	ENOG4108Z73	1	1.8e-68	239.2	Bacteria        SirCa   1.3.1.76        T	T
+envision.uc0.99_ENV1_ADD_022_k141_29689_3_1	TIGR01469	1	8.4e-94	321.3	All     CysG    2.1.1.107       F	T
+envision.uc0.99_ENV1_ADD_022_k141_309625_1_1	TIGR01469	1	1.5e-94	323.8	All     CysG    2.1.1.107       F	T
+envision.uc0.99_ENV1_ADD_022_k141_43200_29_1	TIGR01469	1	2.2e-93	320	All     CysG    2.1.1.107       F	T
+envision.uc0.99_ENV1_ADD_022_k141_29689_3_1	TIGR01469	1	8.4e-94	321.3	All     CobA    2.1.1.107       F	T
+envision.uc0.99_ENV1_ADD_022_k141_309625_1_1	TIGR01469	1	1.5e-94	323.8	All     CobA    2.1.1.107       F	T
+envision.uc0.99_ENV1_ADD_022_k141_43200_29_1	TIGR01469	1	2.2e-93	320	All     CobA    2.1.1.107       F	T
+envision.uc0.99_ENV1_ADD_022_k141_43200_29_1	arCOG01044	2	1.1e-37	137.2	Archaea SirC    1.3.1.76	T	T
+envision.uc0.99_ENV1_MSO_k141_109200_2_1	arCOG01044	1	2e-38	139.6	Archaea SirC    1.3.1.76	T	T
+envision.uc0.99_ENV2_MSO_k141_13207_6_1	TIGR01466 & TIGR01467	1	9.8e-78	268.6	All     CobIJ   2.1.1.130 & 2.1.1.131	T	T,F
+envision.uc0.99_ENV2_S6_k141_202097_1_1	PF06180	1	2.6e-7	37.9	All     CbiK    4.99.1.3	T	T
+envision.uc0.99_ENV3_MSO_k141_117317_2_1	PF06180	1	5.7e-6	33.5	All     CbiK    4.99.1.3	T	T
+envision.uc0.99_ENV3_MSO_k141_120235_7_1	TIGR01466 & TIGR01467	1	4.5e-61	213.7	All     CobIJ   2.1.1.130 & 2.1.1.131	T	F,T
+envision.uc0.99_ENV3_MSO_k141_218191_4_1	ENOG4108Z73	1	1.2e-74	259.5	Bacteria        SirCa   1.3.1.76        T	T
+envision.uc0.99_ENV3_MSO_k141_218191_4_1	arCOG01044	2	1.4e-41	150	Archaea SirC    1.3.1.76	T	T
+envision.uc0.99_ENV3_MSO_k141_261229_1_1	ENOG4108Z73	1	3.3e-72	251.5	Bacteria        SirCa   1.3.1.76        T	T
+envision.uc0.99_ENV3_MSO_k141_261229_1_1	arCOG01044	2	5e-41	148.1	Archaea SirC    1.3.1.76	T	T
+envision.uc0.99_ENV3_MSO_k141_275855_5_1	TIGR01469	1	3.6e-94	322.5	All     CysG    2.1.1.107       F	T
+envision.uc0.99_ENV3_MSO_k141_275855_5_1	TIGR01469	1	3.6e-94	322.5	All     CobA    2.1.1.107       F	T
+envision.uc0.99_ENV3_MSO_k141_275855_5_1	PF00590	2	3e-53	188.6	All     FP00    2.1.1.107       F	T
+envision.uc0.99_ENV3_MSO_k141_27979_3_1	ENOG4108Z73	1	4.2e-67	234.7	Bacteria        SirCa   1.3.1.76        T	T
+envision.uc0.99_ENV3_MSO_k141_32180_6_1	arCOG01044	1	8.9e-39	140.8	Archaea SirC    1.3.1.76	T	T
+envision.uc0.99_ENV3_MSO_k141_372698_2_1	TIGR01466 & TIGR01467	1	6.6e-76	262.6	All     CobIJ   2.1.1.130 & 2.1.1.131	T	T,F
+envision.uc0.99_ENV3_MSO_k141_383762_1_1	TIGR01469	1	5.1e-93	318.8	All     CysG    2.1.1.107       F	T
+envision.uc0.99_ENV3_MSO_k141_383762_1_1	TIGR01469	1	5.1e-93	318.8	All     CobA    2.1.1.107       F	T
+envision.uc0.99_ENV3_MSO_k141_383762_1_1	ENOG4108Z73	2	3.7e-68	238.1	Bacteria        SirCa   1.3.1.76        T	T
+envision.uc0.99_ENV3_MSO_k141_383762_1_1	PF00590	3	3.2e-52	185.2	All     FP00    2.1.1.107       F	T
+envision.uc0.99_ENV3_MSO_k141_41650_1_1	TIGR01469	1	5.6e-94	321.9	All     CysG    2.1.1.107       F	T
+envision.uc0.99_ENV3_MSO_k141_41650_1_1	TIGR01469	1	5.6e-94	321.9	All     CobA    2.1.1.107       F	T
+envision.uc0.99_ENV3_MSO_k141_41650_1_1	PF00590	2	1e-53	190.1	All     FP00    2.1.1.107       F	T
+envision.uc0.99_ENV3_MSO_k141_486766_2_1	TIGR01466 & TIGR01467	1	1.2e-80	278.1	All     CobIJ   2.1.1.130 & 2.1.1.131	T	T,T
+envision.uc0.99_ENV3_MSO_k141_581444_2_1	ENOG4108Z73	1	6.2e-69	240.7	Bacteria        SirCa   1.3.1.76        T	T
+envision.uc0.99_ENV3_MSO_k141_588185_1_1	PF00590	1	4.5e-52	184.7	All     FP00    2.1.1.107       F	T
+envision.uc0.99_ENV3_S3_k141_16845_4_1	PF00590	1	3.1e-52	185.3	All     FP00    2.1.1.107       F	T
+envision.uc0.99_ENV3_S3_k141_232529_2_1	PF00590	1	6.6e-52	184.2	All     FP00    2.1.1.107       F	T
+envision.uc0.99_ENV3_S3_k141_237307_2_1	TIGR01466 & TIGR01467	1	2.2e-60	211.5	All     CobIJ   2.1.1.130 & 2.1.1.131	T	F,T
+envision.uc0.99_ENV3_S3_k141_286858_3_1	PF06180	1	3.2e-6	34.3	All     CbiK    4.99.1.3	T	T
+envision.uc0.99_ENV3_S6_k141_296524_2_1	PF06180	1	2.5e-5	31.4	All     CbiK    4.99.1.3	T	T

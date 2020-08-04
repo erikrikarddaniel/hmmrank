@@ -32,4 +32,5 @@ hmmrank.05:
 	@$(CHECK)
 
 hmmrank.06:
-	../R/hmmrank.r --verbose --scorefile=$@.profile_scores.tsv --qfromfname --outfile=$@.out $@.d/*.tblout
+	../R/hmmrank.r --verbose --annottable=$@.annottable.tsv --minscore=30 --scorefile=$@.profile_scores.tsv --qfromfname --outfile=$@.out $@.d/*.tblout
+	@$(CHECK)

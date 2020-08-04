@@ -1,0 +1,8 @@
+domain	protein	ec_number	profile	specific
+All	CysG	2.1.1.107	TIGR01469	F
+All	CobA	2.1.1.107	TIGR01469	F
+All	FP00	2.1.1.107	PF00590	F
+Bacteria	SirCa	1.3.1.76	ENOG4108Z73	T
+Archaea	SirC	1.3.1.76	arCOG01044	T
+All	CbiK	4.99.1.3	PF06180	T
+All	CobIJ	2.1.1.130 & 2.1.1.131	TIGR01466 & TIGR01467	T

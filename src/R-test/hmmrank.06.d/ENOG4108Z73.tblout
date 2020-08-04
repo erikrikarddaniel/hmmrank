@@ -1,0 +1,22 @@
+#                                                                                                  --- full sequence ---- --- best 1 domain ---- --- domain number estimation ----
+# target name                                   accession  query name                   accession    E-value  score  bias   E-value  score  bias   exp reg clu  ov env dom rep inc description of target
+#                           ------------------- ----------         -------------------- ---------- --------- ------ ----- --------- ------ -----   --- --- --- --- --- --- --- --- ---------------------
+envision.uc0.99_ENV3_MSO_k141_218191_4_1        -          bactNOG.ENOG4108Z73.meta_raw -            1.2e-74  259.5   0.0   1.3e-74  259.4   0.0   1.0   1   0   0   1   1   1   1 -
+envision.uc0.99_ENV3_MSO_k141_261229_1_1        -          bactNOG.ENOG4108Z73.meta_raw -            3.3e-72  251.5   0.1   3.7e-72  251.3   0.1   1.1   1   0   0   1   1   1   1 -
+envision.uc0.99_ENV3_MSO_k141_581444_2_1        -          bactNOG.ENOG4108Z73.meta_raw -            6.2e-69  240.7   0.9   7.3e-69  240.5   0.9   1.0   1   0   0   1   1   1   1 -
+envision.uc0.99_ENV1_ADD_022_k141_286016_2_1    -          bactNOG.ENOG4108Z73.meta_raw -            1.8e-68  239.2   0.0   1.8e-68  239.1   0.0   1.1   1   0   0   1   1   1   1 -
+envision.uc0.99_ENV3_MSO_k141_383762_1_1        -          bactNOG.ENOG4108Z73.meta_raw -            3.7e-68  238.1   0.0   3.8e-68  238.1   0.0   1.1   1   0   0   1   1   1   1 -
+envision.uc0.99_ENV3_MSO_k141_27979_3_1         -          bactNOG.ENOG4108Z73.meta_raw -            4.2e-67  234.7   0.1   4.4e-67  234.6   0.1   1.1   1   0   0   1   1   1   1 -
+envision_debris_megahit_assembly_k141_872276_2  -          bactNOG.ENOG4108Z73.meta_raw -                9.9   12.6   0.1        13   12.3   0.1   1.1   1   0   0   1   1   1   0 # 98 # 475 # 1 # ID=809771_2;partial=01;start_type=GTG;rbs_motif=None;rbs_spacer=None;gc_cont=0.516
+envision.uc0.99_ENV2_S3_k141_158111_1_1         -          bactNOG.ENOG4108Z73.meta_raw -                 10   12.6   0.5        15   12.0   0.5   1.1   1   0   0   1   1   1   0 -
+envision_debris_megahit_assembly_k141_636777_1  -          bactNOG.ENOG4108Z73.meta_raw -                 10   12.6   0.0        16   12.0   0.0   1.2   1   0   0   1   1   1   0 # 61 # 498 # 1 # ID=589898_1;partial=01;start_type=GTG;rbs_motif=TAA;rbs_spacer=3bp;gc_cont=0.377
+#
+# Program:         hmmsearch
+# Version:         3.2.1 (June 2018)
+# Pipeline mode:   SEARCH
+# Query file:      ENOG4108Z73.hmm
+# Target file:     /dev/fd/63
+# Option settings: hmmsearch --tblout ENOG4108Z73.tblout --domtblout ENOG4108Z73.domtblout --cpu 4 ENOG4108Z73.hmm /dev/fd/63 
+# Current dir:     /crex/proj/snic2020-16-76/nobackup/projects/Ben/BenEnv_mrna/assemblies/all_clustered_plus_debris/pfam-hmmer
+# Date:            Tue Jul 28 07:54:27 2020
+# [ok]
