@@ -17,11 +17,14 @@ SCRIPT_VERSION = '1.3.0'
 
 # Get arguments
 # For interactive testing:
-# opt <- list('options' = list('verbose' = TRUE, minscore = 0, scorefile = 'hmmrank.02.profile_scores.tsv'), 'args' = c('hmmrank.02.d/NrdAe.tblout', 'hmmrank.02.d/NrdAg.tblout', 'hmmrank.02.d/NrdAh.tblout', 'hmmrank.02.d/NrdAi.tblout', 'hmmrank.02.d/NrdAk.tblout', 'hmmrank.02.d/NrdAm.tblout', 'hmmrank.02.d/NrdAn.tblout', 'hmmrank.02.d/NrdAq.tblout', 'hmmrank.02.d/NrdA.tblout', 'hmmrank.02.d/NrdAz3.tblout', 'hmmrank.02.d/NrdAz4.tblout', 'hmmrank.02.d/NrdAz.tblout'))
+# opt <- list('options' = list('verbose' = TRUE, qfromfname = FALSE, minscore = 0, scorefile = 'hmmrank.02.profile_scores.tsv'), 'args' = c('hmmrank.02.d/NrdAe.tblout', 'hmmrank.02.d/NrdAg.tblout', 'hmmrank.02.d/NrdAh.tblout', 'hmmrank.02.d/NrdAi.tblout', 'hmmrank.02.d/NrdAk.tblout', 'hmmrank.02.d/NrdAm.tblout', 'hmmrank.02.d/NrdAn.tblout', 'hmmrank.02.d/NrdAq.tblout', 'hmmrank.02.d/NrdA.tblout', 'hmmrank.02.d/NrdAz3.tblout', 'hmmrank.02.d/NrdAz4.tblout', 'hmmrank.02.d/NrdAz.tblout'))
+#
+# Annotation table testing:
+# opt <- list('options' = list('verbose' = TRUE, qfromfname = TRUE, minscore = 0, scorefile = 'hmmrank.06.profile_scores.tsv', annottable = 'hmmrank.06.annottable.tsv'), 'args' = c('hmmrank.06.d/arCOG01044.tblout', 'hmmrank.06.d/ENOG4108Z73.tblout', 'hmmrank.06.d/PF00590.tblout', 'hmmrank.06.d/PF06180.tblout', 'hmmrank.06.d/TIGR01466.tblout', 'hmmrank.06.d/TIGR01467.tblout', 'hmmrank.06.d/TIGR01469.tblout'))
 option_list = list(
   make_option(
     '--annottable', type = "character",
-    help = "Name of table with annotation assignments, at a minium must contain 'protein' and 'profile' columns. The 'profile' column might contain multiple profiles, separated by '&'."
+    help = "Name of table with annotation assignments, at a minium must contain 'protein' and 'profile' columns. The 'protein' column needs to be unique. The 'profile' column might contain multiple profiles, separated by '&'."
   ),
   make_option(
     c('--minscore'), type='double', default=0.0,
@@ -99,6 +102,30 @@ if ( length(tlist) > 0  ) {
 }
 setkey(tblout, profile, accno)
 
+# Read the annottable, if given, split into individual profiles, left join with tableout and summarise
+if ( length(opt$options$annottable) > 0 ) {
+  annottable <- fread(opt$options$annottable) %>% as_tibble() %>%
+    # Make sure the profile column has ' & ' as separator between multiple profiles
+    mutate(profile = gsub('\\s*&\\s*', ' & ', profile))
+  # Check that the protein column is unique
+  if ( nrow(annottable) != nrow(annottable %>% distinct(protein)) ) {
+    write(sprintf("'protein' column in %s not unique, can't continue", opt$options$annottable))
+    quit(save = 'no', status = 1)
+  }
+  # annotmap is our tool to summarise data for each entry in annottable
+  annotmap   <- annottable %>% select(protein, profile) %>%
+    separate_rows(profile, sep = '\\s*&\\s')
+  
+  # Join in the table via the annotmap and summation
+  tblout <- tblout %>%
+    left_join(annotmap, by = 'profile') %>% 
+    group_by(accno, protein) %>% 
+    summarise(profile = paste(profile, collapse = ' & '), evalue = min(evalue), score = sum(score), .groups = 'drop') %>%
+    left_join(annottable %>% select(-profile), by = c('protein')) %>%
+    as.data.table() %>%
+    setkey(profile, accno)
+}
+
 # If we're given a scorefile as an option, read and left join
 if ( length(opt$options$scorefile) > 0 ) {
   logmsg(sprintf("Joining in scores from %s, setting minimum score for absent profiles to %5.2f", opt$options$scorefile, opt$options$minscore))
@@ -118,7 +145,7 @@ if ( length(opt$options$scorefile) > 0 ) {
   tblout$seq_score <- opt$options$minscore
 }
 
-# Calculate rank
+# Filter for scores higher than seq_score and calculate rank
 logmsg("Calculating ranks")
 tblout[score >= seq_score, rank := frank(desc(score)), by = accno]
 
