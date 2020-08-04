@@ -4,7 +4,7 @@ CHECK = if [ ` $(DIFF) | wc -l ` -eq 0 ]; then echo "*** $@ OK ***"; else echo "
 
 all: hmmrank
 
-hmmrank: hmmrank.00 hmmrank.01 hmmrank.02 hmmrank.03 hmmrank.04
+hmmrank: hmmrank.00 hmmrank.01 hmmrank.02 hmmrank.03 hmmrank.04 hmmrank.05
 
 hmmrank.00:
 	../R/hmmrank.r --outfile=$@.out $@.d/*.tblout
@@ -27,5 +27,9 @@ hmmrank.04:
 	../R/hmmrank.r --only_best_scoring --scorefile=$@.profile_scores.tsv --minscore=400 --outfile=$@.out $@.d/*.tblout
 	@$(CHECK)
 
-##hmmrank.05:
-##	../R/hmmrank.r --verbose
+hmmrank.05:
+	../R/hmmrank.r --only_best_scoring --scorefile=$@.profile_scores.tsv --qfromfname --outfile=$@.out $@.d/*.tblout
+	@$(CHECK)
+
+hmmrank.06:
+	../R/hmmrank.r --verbose --scorefile=$@.profile_scores.tsv --qfromfname --outfile=$@.out $@.d/*.tblout

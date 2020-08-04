@@ -11,8 +11,9 @@ suppressPackageStartupMessages(library(readr))
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(tidyr))
 suppressPackageStartupMessages(library(data.table))
+suppressPackageStartupMessages(library(stringr))
 
-SCRIPT_VERSION = '1.2.0'
+SCRIPT_VERSION = '1.3.0'
 
 # Get arguments
 # For interactive testing:
@@ -29,6 +30,10 @@ option_list = list(
   make_option(
     c('--outfile'), type='character',
     help='Name of output file'
+  ),
+  make_option(
+    "--qfromfname", action = "store_true", default = FALSE, 
+    help = "Extract query name from file name -- basename until first period -- instead of taking it from the query column in each data file, default false."
   ),
   make_option(
     c('--scorefile'), type='character',
@@ -62,6 +67,7 @@ logmsg(sprintf("hmmrank.r %s", SCRIPT_VERSION))
 tlist <- list()
 i <- 1
 for ( tbloutfile in grep('\\.tblout', opt$args, value=TRUE) ) {
+  p <- basename(tbloutfile) %>% str_remove('\\..*')
   logmsg(sprintf("Reading %s", tbloutfile))
   t <- read_fwf(
     tbloutfile, fwf_cols(content = c(1, NA)), 
@@ -75,6 +81,7 @@ for ( tbloutfile in grep('\\.tblout', opt$args, value=TRUE) ) {
     ) %>%
     transmute(accno, profile, evalue = as.double(evalue), score = as.double(score)) %>%
     data.table()
+  if ( opt$options$qfromfname ) t$profile <- p
   if ( nrow(t) > 0 ) {
     tlist[[i]] <- t
     i <- i + 1
