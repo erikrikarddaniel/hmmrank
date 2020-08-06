@@ -4,6 +4,7 @@
 envision.uc0.99_ENV3_MSO_k141_486766_2_1        -          TIGR01466            TIGR01466    1.2e-80  278.1   0.0   1.3e-80  278.0   0.0   1.0   1   0   0   1   1   1   1 -
 envision.uc0.99_ENV2_MSO_k141_13207_6_1         -          TIGR01466            TIGR01466    9.8e-78  268.6   0.0   1.5e-77  268.0   0.0   1.3   1   0   0   1   1   1   1 -
 envision.uc0.99_ENV3_MSO_k141_372698_2_1        -          TIGR01466            TIGR01466    6.6e-76  262.6   0.0   7.9e-76  262.3   0.0   1.1   1   0   0   1   1   1   1 -
+testing_presence_in_all_TIGRFAMS                -          TIGR01466            TIGR01466    1.0e-10  100.0   0.0   1.0e-10  100.0   0.0   1.3   1   1   0   1   1   1   0 -
 envision_debris_megahit_assembly_k141_220366_1  -          TIGR01466            TIGR01466    1.7e-07   38.7   0.1   2.3e-07   38.2   0.1   1.4   1   1   0   1   1   1   1 # 114 # 728 # -1 # ID=179879_1;partial=01;start_type=Edge;rbs_motif=None;rbs_spacer=None;gc_cont=0.408
 envision.uc0.99_ENV2_MSO_k141_125212_2_1        -          TIGR01466            TIGR01466    3.1e-06   34.5   0.0   7.3e-06   33.3   0.0   1.5   1   1   0   1   1   1   1 -
 envision_debris_megahit_assembly_k141_18522_1   -          TIGR01466            TIGR01466    3.3e-06   34.4   0.0   4.2e-06   34.1   0.0   1.1   1   0   0   1   1   1   1 # 2 # 319 # 1 # ID=15989_1;partial=11;start_type=Edge;rbs_motif=None;rbs_spacer=None;gc_cont=0.431

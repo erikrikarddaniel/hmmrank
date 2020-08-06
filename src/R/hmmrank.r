@@ -9,6 +9,7 @@
 suppressPackageStartupMessages(library(optparse))
 suppressPackageStartupMessages(library(readr))
 suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(dtplyr))
 suppressPackageStartupMessages(library(tidyr))
 suppressPackageStartupMessages(library(data.table))
 suppressPackageStartupMessages(library(stringr))
@@ -102,33 +103,9 @@ if ( length(tlist) > 0  ) {
 }
 setkey(tblout, profile, accno)
 
-# Read the annottable, if given, split into individual profiles, left join with tableout and summarise
-if ( length(opt$options$annottable) > 0 ) {
-  annottable <- fread(opt$options$annottable) %>% as_tibble() %>%
-    # Make sure the profile column has ' & ' as separator between multiple profiles
-    mutate(profile = gsub('\\s*&\\s*', ' & ', profile))
-  # Check that the protein column is unique
-  if ( nrow(annottable) != nrow(annottable %>% distinct(protein)) ) {
-    write(sprintf("'protein' column in %s not unique, can't continue", opt$options$annottable))
-    quit(save = 'no', status = 1)
-  }
-  # annotmap is our tool to summarise data for each entry in annottable
-  annotmap   <- annottable %>% select(protein, profile) %>%
-    separate_rows(profile, sep = '\\s*&\\s')
-  
-  # Join in the table via the annotmap and summation
-  tblout <- tblout %>%
-    left_join(annotmap, by = 'profile') %>% 
-    group_by(accno, protein) %>% 
-    summarise(profile = paste(profile, collapse = ' & '), evalue = min(evalue), score = sum(score), .groups = 'drop') %>%
-    left_join(annottable %>% select(-profile), by = c('protein')) %>%
-    as.data.table() %>%
-    setkey(profile, accno)
-}
-
 # If we're given a scorefile as an option, read and left join
 if ( length(opt$options$scorefile) > 0 ) {
-  logmsg(sprintf("Joining in scores from %s, setting minimum score for absent profiles to %5.2f", opt$options$scorefile, opt$options$minscore))
+  logmsg(sprintf("Joining in scores from %s, setting minimum score for profiles absent in file to %5.2f", opt$options$scorefile, opt$options$minscore))
   s <- read_tsv(
     opt$options$scorefile,
     col_types = cols(.default = col_character(), seq_score = col_double(), domain_score = col_double())
@@ -145,19 +122,55 @@ if ( length(opt$options$scorefile) > 0 ) {
   tblout$seq_score <- opt$options$minscore
 }
 
-# Filter for scores higher than seq_score and calculate rank
-logmsg("Calculating ranks")
-tblout[score >= seq_score, rank := frank(desc(score)), by = accno]
+# Filter away entries with lower score than the minimum
+tblout <- tblout[score >= seq_score]
+
+# Read the annottable, if given, split into individual profiles, left join with tableout and summarise
+if ( length(opt$options$annottable) > 0 ) {
+  logmsg(sprintf("Creating ranked table with annotations from %s", opt$options$annottable))
+  annottable <- fread(opt$options$annottable) %>% as_tibble()
+  
+  # Check that the protein column is unique
+  if ( nrow(annottable) != length(unique(annottable$protein)) ) {
+    write(sprintf("'protein' column in %s not unique, can't continue", opt$options$annottable))
+    quit(save = 'no', status = 1)
+  }
+  # annotmap is our tool to summarise data for each entry in annottable
+  annotmap   <- annottable %>% 
+    transmute(profilecomb = profile, profile) %>%
+    separate_rows(profile, sep = '\\s*&\\s') %>%
+    distinct() 
+  
+  # Calculate scores for separate profiles as well as the combinations present in the
+  # annotation table. Rank each accession after its score.
+  tblout <- as_tibble(tblout) %>%
+    left_join(annotmap, by = 'profile') %>% 
+    group_by(accno, profilecomb) %>% 
+    summarise(profiles = paste(profile, collapse = ' & '), evalue = min(evalue), score = sum(score), .groups = 'drop') %>%
+    group_by(accno, profilecomb) %>% # Required to get the filtering below correct!
+    filter(identical(sort(strsplit(profilecomb, '\\s*&\\s*')[[1]]), sort(strsplit(profiles, '\\s*&\\s*')[[1]]))) %>%
+    ungroup() %>%
+    group_by(accno) %>% 
+    mutate(rank = rank(desc(score))) %>% 
+    ungroup() %>%
+    transmute(accno, profile = profilecomb, evalue, score, rank) %>%
+    inner_join(annottable, by = 'profile')
+} else {
+  # We didn't have an annotation table, just calculate ranks
+  tblout <- lazy_dt(tblout) %>%
+    group_by(accno) %>% mutate(rank = rank(desc(score))) %>% ungroup() %>%
+    as_tibble()
+}
 
 logmsg(sprintf("Writing to %s", opt$options$outfile))
 if ( opt$options$only_best_scoring ) {
   write_tsv(
-    tblout[score >= seq_score & rank < 2] %>% select(accno, profile, rank, evalue, score) %>% arrange(accno, rank),
+    tblout %>% filter(rank < 2) %>% arrange(accno, rank),
     opt$options$outfile
   )
 } else {
   write_tsv(
-    tblout[score >= seq_score] %>% select(accno, profile, rank, evalue, score) %>% arrange(accno, rank),
+    tblout %>% arrange(accno, rank),
     opt$options$outfile
   )
 }
