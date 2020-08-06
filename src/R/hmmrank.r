@@ -111,19 +111,19 @@ if ( length(opt$options$scorefile) > 0 ) {
     col_types = cols(.default = col_character(), seq_score = col_double(), domain_score = col_double())
   ) %>%
     filter(score_type == 'GA') %>%
-    select(profile, seq_score) %>%
+    transmute(profile, min_score = seq_score) %>%
     data.table() %>%
     setkey(profile)
   
-  tblout[s, on = 'profile', seq_score := i.seq_score] 
-  tblout[is.na(seq_score)]$seq_score <- opt$options$minscore
+  tblout[s, on = 'profile', min_score := i.min_score] 
+  tblout[is.na(min_score)]$min_score <- opt$options$minscore
 } else {
   logmsg(sprintf("Setting minimum scores to %5.2f", opt$options$minscore))
-  tblout$seq_score <- opt$options$minscore
+  tblout$min_score <- opt$options$minscore
 }
 
 # Filter away entries with lower score than the minimum
-tblout <- tblout[score >= seq_score]
+tblout <- tblout[score >= min_score]
 
 # Read the annottable, if given, split into individual profiles, left join with tableout and summarise
 if ( length(opt$options$annottable) > 0 ) {
@@ -146,14 +146,15 @@ if ( length(opt$options$annottable) > 0 ) {
   tblout <- as_tibble(tblout) %>%
     left_join(annotmap, by = 'profile') %>% 
     group_by(accno, profilecomb) %>% 
-    summarise(profiles = paste(profile, collapse = ' & '), evalue = min(evalue), score = sum(score), .groups = 'drop') %>%
+    summarise(profiles = paste(profile, collapse = ' & '), evalue = min(evalue), score = sum(score), min_score = sum(min_score), .groups = 'drop') %>%
     group_by(accno, profilecomb) %>% # Required to get the filtering below correct!
+    # Keep only entries that have a profile combination (profiles) identical to one in the file (profilecomb)
     filter(identical(sort(strsplit(profilecomb, '\\s*&\\s*')[[1]]), sort(strsplit(profiles, '\\s*&\\s*')[[1]]))) %>%
     ungroup() %>%
     group_by(accno) %>% 
     mutate(rank = rank(desc(score))) %>% 
     ungroup() %>%
-    transmute(accno, profile = profilecomb, evalue, score, rank) %>%
+    transmute(accno, profile = profilecomb, evalue, score, min_score, rank) %>%
     inner_join(annottable, by = 'profile')
 } else {
   # We didn't have an annotation table, just calculate ranks
