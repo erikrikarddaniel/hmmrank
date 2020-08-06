@@ -25,7 +25,7 @@ SCRIPT_VERSION = '1.3.0'
 option_list = list(
   make_option(
     '--annottable', type = "character",
-    help = "Name of table with annotation assignments, at a minium must contain 'protein' and 'profile' columns. The 'protein' column needs to be unique. The 'profile' column might contain multiple profiles, separated by '&'."
+    help = "Name of table with annotation assignments, at a minium must contain 'protein' and 'profile' columns. The 'profile' column might contain multiple profiles, separated by '&'."
   ),
   make_option(
     c('--minscore'), type='double', default=0.0,
@@ -130,11 +130,6 @@ if ( length(opt$options$annottable) > 0 ) {
   logmsg(sprintf("Creating ranked table with annotations from %s", opt$options$annottable))
   annottable <- fread(opt$options$annottable) %>% as_tibble()
   
-  # Check that the protein column is unique
-  if ( nrow(annottable) != length(unique(annottable$protein)) ) {
-    write(sprintf("'protein' column in %s not unique, can't continue", opt$options$annottable))
-    quit(save = 'no', status = 1)
-  }
   # annotmap is our tool to summarise data for each entry in annottable
   annotmap   <- annottable %>% 
     transmute(profilecomb = profile, profile) %>%
