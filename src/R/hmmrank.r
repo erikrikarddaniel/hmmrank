@@ -14,7 +14,7 @@ suppressPackageStartupMessages(library(tidyr))
 suppressPackageStartupMessages(library(data.table))
 suppressPackageStartupMessages(library(stringr))
 
-SCRIPT_VERSION = '1.3.0'
+SCRIPT_VERSION = '1.4.0'
 
 # Get arguments
 # For interactive testing:
@@ -50,15 +50,28 @@ option_list = list(
   make_option(
     c("-v", "--verbose"), action="store_true", default=FALSE, 
     help="Print progress messages"
+  ),
+  make_option(
+    c("-V", "--version"), action="store_true", default=FALSE, 
+    help="Print script version number"
   )
 )
 opt = parse_args(
   OptionParser(
-    usage = "%prog [options] file0.tblout .. filen.tblout", 
+    usage = "%prog [options] file0.tblout .. filen.tblout
+
+  Ranks tabular output from hmmsearch (HMMER package). Optionally filters based on score and adds annotation information.
+
+  This is a brief overview of options, check out https://github.com/erikrikarddaniel/hmmrank/blob/master/README.md for more instructions.", 
     option_list = option_list
   ), 
   positional_arguments = TRUE
 )
+
+if ( opt$options$version ) {
+  write(SCRIPT_VERSION, stdout())
+  quit('no')
+}  
 
 logmsg = function(msg, llevel='INFO') {
   if ( opt$options$verbose ) {

@@ -1,0 +1,27 @@
+{% set version = "1.9.8" %}
+
+package:
+  name: pfitmap-db
+  version: {{ version }}
+
+source:
+  url: https://github.com/erikrikarddaniel/pfitmap-db/archive/v{{ version }}.tar.gz
+
+requirements:
+  build:
+    - python
+    - setuptools
+
+  run:
+    - r-dplyr >=1.0.0
+    - r-dbplyr
+    - r-dtplyr
+    - r-data.table
+    - r-rsqlite
+    - r-optparse
+    - r-tidyverse
+    - r-feather
+    - r-stringi
+    - r-stringr
+    - r-feather
+    - bioconductor-biostrings
