@@ -1,11 +1,11 @@
-{% set version = "1.9.8" %}
+{% set version = "1.4.0" %}
 
 package:
-  name: pfitmap-db
+  name: hmmrank
   version: {{ version }}
 
 source:
-  url: https://github.com/erikrikarddaniel/pfitmap-db/archive/v{{ version }}.tar.gz
+  url: https://github.com/erikrikarddaniel/hmmrank/archive/v{{ version }}.tar.gz
 
 requirements:
   build:
@@ -14,14 +14,10 @@ requirements:
 
   run:
     - r-dplyr >=1.0.0
-    - r-dbplyr
     - r-dtplyr
+    - r-tidyr
     - r-data.table
-    - r-rsqlite
     - r-optparse
-    - r-tidyverse
-    - r-feather
+    - r-readr
     - r-stringi
     - r-stringr
-    - r-feather
-    - bioconductor-biostrings
