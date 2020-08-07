@@ -1,9 +1,9 @@
 # hmmrank
-Calculates a ranking of hmm profiles per sequence
+
+Calculates a ranking of hmm profiles per sequence.
 
 Given a set of hmmsearch "tblout" result files, this R script outputs a table where each sequence hits
-against a set of hmm profiles are ranked based on score. It requires the `optparse` package as well as
-`readr`, `tidyr` and `dplyr` from Tidyverse.
+against a set of hmm profiles are ranked based on score.
 
 ## Installation and documentation
 
@@ -11,7 +11,7 @@ After installing the package with Conda, you can run the script with`--help` to
 get help...
 
 ```
-$ conda create -n hmmrank -c matricaria hmmrank
+$ conda install -c matricaria hmmrank # (Better in an environment, see Conda documentation)
 $ hmmrank.r --help
 Usage: ../R/hmmrank.r [options] file0.tblout .. filen.tblout
 
@@ -50,10 +50,42 @@ Options:
 
 ```
 
-### Running `hmmrank` with an annotation table
+## Creating a scorefile
 
+A file for the `--scorefile` parameter is a tab separated file looking like this:
 
-#### Entries with multiple profiles
+```
+profile	score_type	seq_score	domain_score
+PF00590	GA	27.80	27.80
+PF06180	GA	26.20	26.20
+TIGR01466	GA	100.00	100.00
+TIGR01467	GA	100.00	100.00
+TIGR01469	GA	100.00	100.00
+```
+
+It can be created from a set of Pfam and TIGRFAM hmm files like this:
+
+```
+echo -e "profile\tscore_type\tseq_score\tdomain_score" > scores.tsv; grep '^GA' *.hmm | sed 's/.hmm:/\t/' | sed 's/ \+/\t/' | sed 's/;//' >> scores.tsv
+```
+
+(If there are other hmm files in the directory, that do not contain GA scores, it doesn't hurt, but
+they will not be included in the output.)
+
+The above example and command implies that you use the `--qfromfname` option to the script and that
+your output files are named after the profile, minus the `.hmm` and plus `.tblout`, e.g.
+`PF00590.tblout`
+
+The score file doesn't have to include all profiles, any that are not there will be set to 0 or
+whatever you specify with the `--minscore` parameter to the script.
+
+## Running `hmmrank` with an annotation table
+
+You can provide a table with annotation data using the `--annottable` option. The table must contain
+a `protein` and a `profile` column (names are case sensitive), but can contain any number of other
+columns, which will be added to the output table.
+
+### Entries with multiple profiles
 
 The `profile` column may contain entries like `TIGR01466 & TIGR01467` which will be taken as an
 entry that requires both profiles to match a sequence. Scores for the two matches will be summed and
