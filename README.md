@@ -24,6 +24,9 @@ Options:
         --annottable=ANNOTTABLE
                 Name of table with annotation assignments, at a minium must contain 'protein' and 'profile' columns. The 'profile' column might contain multiple profiles, separated by '&'.
 
+        --maxscore=MAXSCORE
+                Maximum sequence score; overrides the sequence score in scorefile if higher than this value, default Inf
+
         --minscore=MINSCORE
                 Minimum score, default 0
 
@@ -79,6 +82,10 @@ your output files are named after the profile, minus the `.hmm` and plus `.tblou
 The score file doesn't have to include all profiles, any that are not there will be set to 0 or
 whatever you specify with the `--minscore` parameter to the script.
 
+If you have a lot of fragmentary sequences, scores in hmm files can be a little too strict (e.g.
+TIGRFAMs). You can use `--maxscore` to limit the minimum score globally. In the output, the correct
+score will appear so you can filter afterwards.
+
 ## Running `hmmrank` with an annotation table
 
 You can provide a table with annotation data using the `--annottable` option. The table must contain
@@ -99,4 +106,5 @@ that match both profiles will be assigned to whichever of the two they match bes
 Also note that score filtering, if asked for, takes place before evaluating combinations. Long
 proteins that match multiple profiles may be penalized by this if the target sequence is a fragment.
 You may want to lower high minimum scores to deal with this problem; take a particular look at
-TIGRFAMs since they typically are long proteins with high default GA scores.
+TIGRFAMs since they typically are long proteins with high default GA scores. See also description of
+`--maxscore` above.

@@ -7,6 +7,9 @@ package:
 source:
   url: https://github.com/erikrikarddaniel/hmmrank/archive/v{{ version }}.tar.gz
 
+build:
+  noarch: generic
+
 requirements:
   build:
     - python

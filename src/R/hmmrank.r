@@ -14,18 +14,22 @@ suppressPackageStartupMessages(library(tidyr))
 suppressPackageStartupMessages(library(data.table))
 suppressPackageStartupMessages(library(stringr))
 
-SCRIPT_VERSION = '1.4.0'
+SCRIPT_VERSION = '1.4.1'
 
 # Get arguments
 # For interactive testing:
 # opt <- list('options' = list('verbose' = TRUE, qfromfname = FALSE, minscore = 0, scorefile = 'hmmrank.02.profile_scores.tsv'), 'args' = c('hmmrank.02.d/NrdAe.tblout', 'hmmrank.02.d/NrdAg.tblout', 'hmmrank.02.d/NrdAh.tblout', 'hmmrank.02.d/NrdAi.tblout', 'hmmrank.02.d/NrdAk.tblout', 'hmmrank.02.d/NrdAm.tblout', 'hmmrank.02.d/NrdAn.tblout', 'hmmrank.02.d/NrdAq.tblout', 'hmmrank.02.d/NrdA.tblout', 'hmmrank.02.d/NrdAz3.tblout', 'hmmrank.02.d/NrdAz4.tblout', 'hmmrank.02.d/NrdAz.tblout'))
 #
 # Annotation table testing:
-# opt <- list('options' = list('verbose' = TRUE, qfromfname = TRUE, minscore = 0, scorefile = 'hmmrank.06.profile_scores.tsv', annottable = 'hmmrank.06.annottable.tsv'), 'args' = c('hmmrank.06.d/arCOG01044.tblout', 'hmmrank.06.d/ENOG4108Z73.tblout', 'hmmrank.06.d/PF00590.tblout', 'hmmrank.06.d/PF06180.tblout', 'hmmrank.06.d/TIGR01466.tblout', 'hmmrank.06.d/TIGR01467.tblout', 'hmmrank.06.d/TIGR01469.tblout'))
+# opt <- list('options' = list('verbose' = TRUE, qfromfname = TRUE, minscore = 0, maxscore=100, scorefile = 'hmmrank.08.profile_scores.tsv', annottable = 'hmmrank.08.annottable.tsv'), 'args' = c('hmmrank.08.d/arCOG01044.tblout', 'hmmrank.08.d/ENOG4108Z73.tblout', 'hmmrank.08.d/PF00590.tblout', 'hmmrank.08.d/PF06180.tblout', 'hmmrank.08.d/TIGR01466.tblout', 'hmmrank.08.d/TIGR01467.tblout', 'hmmrank.08.d/TIGR01469.tblout'))
 option_list = list(
   make_option(
     '--annottable', type = "character",
     help = "Name of table with annotation assignments, at a minium must contain 'protein' and 'profile' columns. The 'profile' column might contain multiple profiles, separated by '&'."
+  ),
+  make_option(
+    c('--maxscore'), type='double', default=Inf,
+    help='Maximum sequence score; overrides the sequence score in scorefile if higher than this value, default %default'
   ),
   make_option(
     c('--minscore'), type='double', default=0.0,
@@ -130,13 +134,20 @@ if ( length(opt$options$scorefile) > 0 ) {
   
   tblout[s, on = 'profile', min_score := i.min_score] 
   tblout[is.na(min_score)]$min_score <- opt$options$minscore
+  tblout$max_score <- opt$options$maxscore
 } else {
   logmsg(sprintf("Setting minimum scores to %5.2f", opt$options$minscore))
   tblout$min_score <- opt$options$minscore
+  tblout$max_score <- opt$options$maxscore
 }
 
 # Filter away entries with lower score than the minimum
-tblout <- tblout[score >= min_score]
+tblout <- lazy_dt(tblout) %>%
+  group_by(accno, profile) %>%
+  filter(score >= min(min_score, max_score)) %>%
+  ungroup() %>%
+  select(-max_score) %>%
+  as.data.table()
 
 # Read the annottable, if given, split into individual profiles, left join with tableout and summarise
 if ( length(opt$options$annottable) > 0 ) {
