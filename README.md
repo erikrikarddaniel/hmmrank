@@ -69,7 +69,7 @@ TIGR01469	GA	100.00	100.00
 It can be created from a set of Pfam and TIGRFAM hmm files like this:
 
 ```
-echo -e "profile\tscore_type\tseq_score\tdomain_score" > scores.tsv; grep '^GA' *.hmm | sed 's/.hmm:/\t/' | sed 's/ \+/\t/' | sed 's/;//' >> scores.tsv
+echo -e "profile\tscore_type\tseq_score\tdomain_score" > scores.tsv; grep '^GA' *.hmm | sed 's/.hmm:/\t/' | sed 's/ \+/\t/g' | sed 's/;//' >> scores.tsv
 ```
 
 (If there are other hmm files in the directory, that do not contain GA scores, it doesn't hurt, but
