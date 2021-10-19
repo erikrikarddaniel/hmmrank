@@ -14,7 +14,7 @@ suppressPackageStartupMessages(library(tidyr))
 suppressPackageStartupMessages(library(data.table))
 suppressPackageStartupMessages(library(stringr))
 
-SCRIPT_VERSION = '1.4.2'
+SCRIPT_VERSION = '1.4.3'
 
 # Get arguments
 # For interactive testing:
