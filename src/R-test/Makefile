@@ -4,7 +4,7 @@ CHECK = if [ ` $(DIFF) | wc -l ` -eq 0 ]; then echo "*** $@ OK ***"; else echo "
 
 all: hmmrank
 
-hmmrank: hmmrank.00 hmmrank.01 hmmrank.02 hmmrank.03 hmmrank.04 hmmrank.05 hmmrank.06 hmmrank.07 hmmrank.08 hmmrank.09
+hmmrank: hmmrank.00 hmmrank.01 hmmrank.02 hmmrank.03 hmmrank.04 hmmrank.05 hmmrank.06 hmmrank.07 hmmrank.08 #hmmrank.09
 
 hmmrank.00:
 	../R/hmmrank.r --outfile=$@.out $@.d/*.tblout
