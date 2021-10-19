@@ -14,7 +14,7 @@ suppressPackageStartupMessages(library(tidyr))
 suppressPackageStartupMessages(library(data.table))
 suppressPackageStartupMessages(library(stringr))
 
-SCRIPT_VERSION = '1.4.1'
+SCRIPT_VERSION = '1.4.2'
 
 # Get arguments
 # For interactive testing:
@@ -102,6 +102,7 @@ for ( tbloutfile in grep('\\.tblout', opt$args, value=TRUE) ) {
     col_types = cols(content = col_character()), 
     comment='#'
   ) %>% 
+    filter(! grepl('^ *#', content)) %>%
     separate(
       content, 
       c('accno', 't0', 'profile', 't1', 'evalue', 'score', 'bias', 'f0', 'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9', 'f10', 'rest'), 
