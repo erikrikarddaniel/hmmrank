@@ -22,6 +22,9 @@ SCRIPT_VERSION = '1.4.1'
 #
 # Annotation table testing:
 # opt <- list('options' = list('verbose' = TRUE, qfromfname = TRUE, minscore = 0, maxscore=100, scorefile = 'hmmrank.08.profile_scores.tsv', annottable = 'hmmrank.08.annottable.tsv'), 'args' = c('hmmrank.08.d/arCOG01044.tblout', 'hmmrank.08.d/ENOG4108Z73.tblout', 'hmmrank.08.d/PF00590.tblout', 'hmmrank.08.d/PF06180.tblout', 'hmmrank.08.d/TIGR01466.tblout', 'hmmrank.08.d/TIGR01467.tblout', 'hmmrank.08.d/TIGR01469.tblout'))
+#
+# TC06:
+# opt <- list('options' = list('verbose' = TRUE, qfromfname = TRUE, minscore = 30, maxscore=100, scorefile = 'hmmrank.06.profile_scores.tsv', annottable = 'hmmrank.06.annottable.tsv'), 'args' = Sys.glob('hmmrank.06.d/*.tblout'))
 option_list = list(
   make_option(
     '--annottable', type = "character",

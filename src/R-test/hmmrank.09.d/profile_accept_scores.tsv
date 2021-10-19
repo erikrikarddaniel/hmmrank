@@ -1,0 +1,19 @@
+pfile	profile	score_type	seq_score	domain_score	description
+PF06180.hmm	CbiK	GA	26.20	26.20	Cobalt chelatase (CbiK)
+PF06180.hmm	CbiK	TC	26.20	26.20	Cobalt chelatase (CbiK)
+PF06180.hmm	CbiK	NC	26.10	26.10	Cobalt chelatase (CbiK)
+TIGR01467.hmm	TIGR01467	GA	163.25	163.25	cobI_cbiL: precorrin-2 C(20)-methyltransferase
+TIGR01467.hmm	TIGR01467	TC	163.25	163.25	cobI_cbiL: precorrin-2 C(20)-methyltransferase
+TIGR01467.hmm	TIGR01467	NC	84.75	84.75	cobI_cbiL: precorrin-2 C(20)-methyltransferase
+TIGR01469.hmm	TIGR01469	GA	185.00	185.00	cobA_cysG_Cterm: uroporphyrinogen-III C-methyltransferase
+TIGR01469.hmm	TIGR01469	TC	185.00	185.00	cobA_cysG_Cterm: uroporphyrinogen-III C-methyltransferase
+TIGR01469.hmm	TIGR01469	NC	184.25	184.25	cobA_cysG_Cterm: uroporphyrinogen-III C-methyltransferase
+TIGR00708.hmm	TIGR00708	GA	167.75	167.75	cobA: cob(I)yrinic acid a,c-diamide adenosyltransferase
+TIGR00708.hmm	TIGR00708	TC	167.75	167.75	cobA: cob(I)yrinic acid a,c-diamide adenosyltransferase
+TIGR00708.hmm	TIGR00708	NC	79.50	79.50	cobA: cob(I)yrinic acid a,c-diamide adenosyltransferase
+PF00590.hmm	TP_methylase	GA	27.80	27.80	Tetrapyrrole (Corrin/Porphyrin) Methylases
+PF00590.hmm	TP_methylase	TC	27.80	27.80	Tetrapyrrole (Corrin/Porphyrin) Methylases
+PF00590.hmm	TP_methylase	NC	27.70	27.70	Tetrapyrrole (Corrin/Porphyrin) Methylases
+TIGR01466.hmm	TIGR01466	GA	246.35	246.35	cobJ_cbiH: precorrin-3B C17-methyltransferase
+TIGR01466.hmm	TIGR01466	TC	246.35	246.35	cobJ_cbiH: precorrin-3B C17-methyltransferase
+TIGR01466.hmm	TIGR01466	NC	103.80	103.80	cobJ_cbiH: precorrin-3B C17-methyltransferase

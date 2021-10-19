@@ -4,7 +4,7 @@ CHECK = if [ ` $(DIFF) | wc -l ` -eq 0 ]; then echo "*** $@ OK ***"; else echo "
 
 all: hmmrank
 
-hmmrank: hmmrank.00 hmmrank.01 hmmrank.02 hmmrank.03 hmmrank.04 hmmrank.05 hmmrank.06 hmmrank.07 hmmrank.08
+hmmrank: hmmrank.00 hmmrank.01 hmmrank.02 hmmrank.03 hmmrank.04 hmmrank.05 hmmrank.06 hmmrank.07 hmmrank.08 hmmrank.09
 
 hmmrank.00:
 	../R/hmmrank.r --outfile=$@.out $@.d/*.tblout
@@ -43,4 +43,9 @@ hmmrank.07:
 # New option: --maxscore
 hmmrank.08:
 	../R/hmmrank.r --annottable=$@.annottable.tsv --minscore=30 --maxscore=100 --scorefile=$@.profile_scores.tsv --qfromfname --outfile=$@.out $@.d/*.tblout
+	@$(CHECK)
+
+# I was missing entries with the classical accept score table
+hmmrank.09:
+	../R/hmmrank.r --annottable=$@.annottable.tsv --minscore=30 --maxscore=100 --scorefile=$@.d/profile_accept_scores.tsv --outfile=$@.out $@.d/*.tblout
 	@$(CHECK)

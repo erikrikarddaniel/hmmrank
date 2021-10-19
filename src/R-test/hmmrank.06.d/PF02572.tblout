@@ -1,0 +1,20 @@
+#                                                                                          --- full sequence ---- --- best 1 domain ---- --- domain number estimation ----
+# target name                                   accession  query name           accession    E-value  score  bias   E-value  score  bias   exp reg clu  ov env dom rep inc description of target
+#                           ------------------- ---------- -------------------- ---------- --------- ------ ----- --------- ------ -----   --- --- --- --- --- --- --- --- ---------------------
+envision.uc0.99_ENV1_MSO_k141_168061_1_1        -          CobA_CobO_BtuR       PF02572.16   1.3e-75  261.0   0.0   1.8e-38  140.1   0.0   2.0   2   0   0   2   2   2   2 - 
+envision.uc0.99_ENV3_MSO_k141_242522_3_1        -          CobA_CobO_BtuR       PF02572.16   2.8e-60  211.1   0.6   3.1e-60  211.0   0.6   1.0   1   0   0   1   1   1   1 - 
+envision.uc0.99_ENV1_ADD_022_k141_187684_2_1    -          CobA_CobO_BtuR       PF02572.16   6.7e-60  209.9   0.0   9.4e-60  209.4   0.0   1.2   1   0   0   1   1   1   1 - 
+envision.uc0.99_ENV3_MSO_k141_252771_1_1        -          CobA_CobO_BtuR       PF02572.16   5.1e-59  207.0   0.2   5.1e-59  207.0   0.2   1.3   2   0   0   2   2   1   1 - 
+envision.uc0.99_ENV3_MSO_k141_167376_1_1        -          CobA_CobO_BtuR       PF02572.16   1.2e-57  202.5   0.3   1.7e-57  202.0   0.3   1.2   1   0   0   1   1   1   1 - 
+envision.uc0.99_ENV1_ADD_022_k141_98750_5_1     -          CobA_CobO_BtuR       PF02572.16   1.4e-57  202.4   0.1   1.8e-57  202.0   0.1   1.1   1   0   0   1   1   1   1 - 
+envision.uc0.99_ENV3_MSO_k141_41771_1_1         -          CobA_CobO_BtuR       PF02572.16   2.4e-57  201.5   1.0   3.1e-57  201.2   1.0   1.1   1   0   0   1   1   1   1 - 
+envision.uc0.99_ENV1_MSO_k141_214198_2_1        -          CobA_CobO_BtuR       PF02572.16   2.7e-57  201.4   0.1   3.1e-57  201.2   0.1   1.0   1   0   0   1   1   1   1 - 
+envision.uc0.99_ENV3_S6_k141_343739_1_1         -          CobA_CobO_BtuR       PF02572.16   3.8e-57  200.9   0.1   4.9e-57  200.6   0.1   1.1   1   0   0   1   1   1   1 - 
+envision.uc0.99_ENV1_ADD_022_k141_24245_1_1     -          CobA_CobO_BtuR       PF02572.16   4.1e-57  200.8   0.2   5.4e-57  200.4   0.2   1.1   1   0   0   1   1   1   1 - 
+envision.uc0.99_ENV3_MSO_k141_321822_1_1        -          CobA_CobO_BtuR       PF02572.16   4.9e-57  200.6   0.6   5.6e-57  200.4   0.6   1.0   1   0   0   1   1   1   1 - 
+envision.uc0.99_ENV1_ADD_022_k141_191601_2_1    -          CobA_CobO_BtuR       PF02572.16     6e-57  200.3   0.4   7.7e-57  199.9   0.4   1.1   1   0   0   1   1   1   1 - 
+envision.uc0.99_ENV3_S3_k141_129054_7_1         -          CobA_CobO_BtuR       PF02572.16     6e-57  200.3   0.5   7.8e-57  199.9   0.5   1.1   1   0   0   1   1   1   1 - 
+envision.uc0.99_ENV3_MSO_k141_181724_3_1        -          CobA_CobO_BtuR       PF02572.16   3.5e-56  197.8   0.5   3.5e-56  197.8   0.5   1.5   2   0   0   2   2   1   1 - 
+envision.uc0.99_ENV1_ADD_022_k141_250754_2_1    -          CobA_CobO_BtuR       PF02572.16   9.8e-56  196.3   0.1   1.2e-55  196.0   0.1   1.1   1   0   0   1   1   1   1 - 
+envision.uc0.99_ENV3_MSO_k141_149875_2_1        -          CobA_CobO_BtuR       PF02572.16   1.5e-55  195.7   0.4   1.9e-55  195.4   0.4   1.1   1   0   0   1   1   1   1 - 
+envision.uc0.99_ENV2_MSO_k141_266846_1_1        -          CobA_CobO_BtuR       PF02572.16   3.8e-55  194.4   0.1   5.5e-55  193.9   0.1   1.2   1   0   0   1   1   1   1 - 
