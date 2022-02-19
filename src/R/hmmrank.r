@@ -14,7 +14,7 @@ suppressPackageStartupMessages(library(tidyr))
 suppressPackageStartupMessages(library(data.table))
 suppressPackageStartupMessages(library(stringr))
 
-SCRIPT_VERSION = '1.4.3'
+SCRIPT_VERSION = '1.5.0'
 
 # Get arguments
 # For interactive testing:
@@ -25,6 +25,9 @@ SCRIPT_VERSION = '1.4.3'
 #
 # TC06:
 # opt <- list('options' = list('verbose' = TRUE, qfromfname = TRUE, minscore = 30, maxscore=100, scorefile = 'hmmrank.06.profile_scores.tsv', annottable = 'hmmrank.06.annottable.tsv'), 'args' = Sys.glob('hmmrank.06.d/*.tblout'))
+#
+# TC10 (ties):
+# opt <- list('options' = list('verbose' = TRUE, qfromfname = FALSE, minscore = 0), 'args' = Sys.glob('hmmrank.10.d/*.tblout'))
 option_list = list(
   make_option(
     '--annottable', type = "character",
@@ -175,14 +178,18 @@ if ( length(opt$options$annottable) > 0 ) {
     filter(identical(sort(strsplit(profilecomb, '\\s*&\\s*')[[1]]), sort(strsplit(profiles, '\\s*&\\s*')[[1]]))) %>%
     ungroup() %>%
     group_by(accno) %>% 
-    mutate(rank = rank(desc(score))) %>% 
+    arrange(desc(score), evalue, profiles) %>%
+    mutate(rank = row_number()) %>%
     ungroup() %>%
     transmute(accno, profile = profilecomb, evalue, score, min_score, rank) %>%
     inner_join(annottable, by = 'profile')
 } else {
   # We didn't have an annotation table, just calculate ranks
   tblout <- lazy_dt(tblout) %>%
-    group_by(accno) %>% mutate(rank = rank(desc(score))) %>% ungroup() %>%
+    group_by(accno) %>% 
+    arrange(desc(score), evalue, profile) %>%
+    mutate(rank = row_number()) %>%
+    ungroup() %>%
     as_tibble()
 }
 

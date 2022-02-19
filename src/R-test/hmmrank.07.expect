@@ -45,7 +45,7 @@ envision.uc0.99_ENV3_S3_k141_286858_3_1	PF06180	3.2e-6	34.3	26.2	1	All	CbiK	4.99
 envision.uc0.99_ENV3_S6_k141_296524_2_1	PF06180	2.5e-5	31.4	26.2	1	All	CbiK	4.99.1.3	T
 testing_presence_in_all_TIGRFAMS	TIGR01466 & TIGR01467	1e-10	200	200	1	Bacteria	CobIJ	2.1.1.130 & 2.1.1.131	T
 testing_presence_in_all_TIGRFAMS	TIGR01466 & TIGR01467	1e-10	200	200	1	Archaea	CobIJ	2.1.1.130 & 2.1.1.131	T
-testing_presence_in_all_TIGRFAMS	TIGR01466	1e-10	100	100	3	All	CobI	2.1.1.130	T
+testing_presence_in_all_TIGRFAMS	TIGR01466	1e-10	100	100	2	All	CobI	2.1.1.130	T
 testing_presence_in_all_TIGRFAMS	TIGR01467	1e-10	100	100	3	All	CobJ	2.1.1.131	T
-testing_presence_in_all_TIGRFAMS	TIGR01469	1e-10	100	100	3	All	CysG	2.1.1.107	F
-testing_presence_in_all_TIGRFAMS	TIGR01469	1e-10	100	100	3	All	CobA	2.1.1.107	F
+testing_presence_in_all_TIGRFAMS	TIGR01469	1e-10	100	100	4	All	CysG	2.1.1.107	F
+testing_presence_in_all_TIGRFAMS	TIGR01469	1e-10	100	100	4	All	CobA	2.1.1.107	F
